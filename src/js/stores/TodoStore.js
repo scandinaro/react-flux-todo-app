@@ -21,26 +21,28 @@ class TodoStore extends EventEmitter {
 
   createTodo(text) {
     const id = Date.now();
-
     this.todos.push({
       id,
       text,
       complete: false,
     });
-
     this.emit("change");
   }
 
   deleteTodo(id) {
     var index = this.todos.findIndex(x => x.id === id);
-
     this.todos.splice(index, 1);
-
     this.emit("change");
   }
 
   editTodo(id)  {
   
+  }
+
+  toggleComplete(id) {
+    var index = this.todos.findIndex(x => x.id === id);
+    this.todos[index].complete = !this.todos[index].complete;
+    this.emit("change");
   }
 
   getAll() {
@@ -67,7 +69,11 @@ class TodoStore extends EventEmitter {
         break
       }
       case "UPDATE_TODO": {
-        this.updateTOdo(action.id);
+        this.updateTodo(action.id);
+        break
+      }
+      case "TOGGLE_COMPLETE": {
+        this.toggleComplete(action.id);
         break
       }
     }

@@ -16,6 +16,10 @@ export default class Todo extends React.Component {
     TodoActions.editTodo(this.props.id);
   }
 
+  toggleComplete() {
+    TodoActions.toggleComplete(this.props.id);
+  }
+
   render() {
     const buttonStyle = { margin: "5px" };
 
@@ -34,7 +38,7 @@ export default class Todo extends React.Component {
     return (
       <li>
         <span>{text}</span>
-        <span class="btn btn-default btn-xs" style={buttonStyle}>{icon}</span>
+        <span onClick={this.toggleComplete.bind(this)} class="btn btn-default btn-xs" style={buttonStyle}>{icon}</span>
         <button onClick={this.editTodo.bind(this)} class="btn btn-primary btn-sm" style={buttonStyle}>Edit</button>
         <button onClick={this.deleteTodo.bind(this)} class="btn btn-danger btn-sm" style={buttonStyle}>Delete</button>
       </li>
