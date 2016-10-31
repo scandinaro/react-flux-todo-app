@@ -40,6 +40,8 @@ export default class Todo extends React.Component {
         text: text,
       },
     ];
+    // this is poorly written, should just call TodoActions.updateTodo, but not sure how to go about
+    // that with the way the array was initally set up.
     TodoActions.saveTodo(text);
     TodoActions.deleteTodo(id);
   }
