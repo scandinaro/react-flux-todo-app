@@ -1,34 +1,31 @@
 import dispatcher from "../dispatcher";
 
-export function createTodo(text) {
+export function saveTodo(text) {
+  // console.log("Inside TodoActions.saveTodo()");
   dispatcher.dispatch({
-    type: "CREATE_TODO",
+    type: "SAVE_TODO",
     text,
   });
 }
 
 export function deleteTodo(id) {
+  // console.log("Inside TodoActions.deleteTodo()");
   dispatcher.dispatch({
     type: "DELETE_TODO",
     id,
   });
 }
 
-export function editTodo(id) {
+export function toggleEdit(id) {
+  // console.log("Inside TodoActions.toggleEdit()");
   dispatcher.dispatch({
-    type: "EDIT_TODO",
-    id,
-  });
-}
-
-export function updateTodo(id) {
-  dispatcher.dispatch({
-    type: "UPDATE_TODO",
+    type: "TOGGLE_EDIT",
     id,
   });
 }
 
 export function toggleComplete(id) {
+  // console.log("Inside TodoActions.toggleComplete()");
   dispatcher.dispatch({
     type: "TOGGLE_COMPLETE",
     id,
@@ -39,6 +36,7 @@ export function reloadTodos() {
   // axios("http://someurl.com/somedataendpoint").then((data) => {
   //   console.log("got the data!", data);
   // })
+  // console.log("Inside TodoActions.reloadTodos()");
   dispatcher.dispatch({type: "FETCH_TODOS"});
   setTimeout(() => {
     dispatcher.dispatch({type: "RECEIVE_TODOS", todos: [
@@ -55,3 +53,4 @@ export function reloadTodos() {
     ]});
   }, 1000);
 }
+

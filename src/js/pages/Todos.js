@@ -15,33 +15,39 @@ export default class Featured extends React.Component {
   }
 
   componentWillMount() {
+    // console.log("Inside Todos.componentWillMount()");
     TodoStore.on("change", this.getTodos);
   }
 
   componentWillUnmount() {
+    // console.log("Inside Todos.componentWillUnmount()");
     TodoStore.removeListener("change", this.getTodos);
   }
 
   getTodos() {
+    // console.log("Inside Todos.getTodos()");
     this.setState({
       todos: TodoStore.getAll(),
     });
   }
 
-  createTodo() {
-    const createInput = this.refs.createInput;
-    const task = createInput.value;
+  saveTodo() {
+    // console.log("Inside Todos.saveTodo()");
+    const saveInput = this.refs.saveInput;
+    const task = saveInput.value;
 
-    TodoActions.createTodo(task);
+    TodoActions.saveTodo(task);
 
-    this.refs.createInput.value = '';
+    this.refs.saveInput.value = '';
   }
 
   reloadTodos() {
+    // console.log("Inside Todos.reloadTodos()");
     TodoActions.reloadTodos();
   }
 
   render() {
+    // console.log("Inside Todos.render()");
     const buttonStyle = { margin: "10px" };
 
     const { todos } = this.state;
@@ -52,15 +58,16 @@ export default class Featured extends React.Component {
 
     return (
       <div>
-        <form onSubmit={this.createTodo.bind(this)}>
-          <input type="text" placeholder="add a task" ref="createInput" />
-          <button class="btn btn-success btn-sm" style={buttonStyle}>Create</button>
+        <form onSubmit={this.saveTodo.bind(this)}>
+          <input type="text" placeholder="add a task" ref="saveInput" />
+          <button class="btn btn-success btn-sm" style={buttonStyle}>Save</button>
         </form>
         <br />
-        <button onClick={this.reloadTodos.bind(this)} class="btn btn-primary btn-sm" >Reload!</button>
+        <button onClick={this.reloadTodos.bind(this)} class="btn btn-default btn-sm" >Reload!</button>
         <h1>Todos</h1>
         <ul>{TodoComponents}</ul>
       </div>
     );
   }
 }
+
