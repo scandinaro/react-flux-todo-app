@@ -93,4 +93,3 @@ const todoStore = new TodoStore;
 dispatcher.register(todoStore.handleActions.bind(todoStore));
 
 export default todoStore;
-
